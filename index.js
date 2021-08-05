@@ -69,8 +69,20 @@ box.innerHTML = `
 <img src="${image}" alt="${text}" />
 <p class="info">${text}</p>
 `
+box.addEventListener("click", ()=> {
+  setTextMessage(text)
+  speakText()
+
+  // Add active effect
+  box.classList.add("active")
+  setTimeout(()=> box.classList.remove("active"),999)
+})
 main.appendChild(box)
 }
+
+// Init speech synth
+const message = new SpeechSynthesisUtterance()
+
 
 data.forEach(createBox)
 
@@ -87,6 +99,17 @@ const getVoices = () => {
   })
 }
 getVoices()
+
+// Set text
+const setTextMessage = (text) => {
+  message.text = text
+}
+
+// Speak Text
+const speakText = () => {
+  speechSynthesis.speak(message)
+}
+
 
 // Voices changed
 speechSynthesis.addEventListener("voiceschanged", getVoices)
