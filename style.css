@@ -47,6 +47,10 @@ margin:auto;
 margin-bottom: 20px;
 }
 
+.btn-toggle:hover {
+  box-shadow: 0 0 10px 5px orange;
+}
+
 .text-box {
   width: 70%;
   position: absolute;
