@@ -4,6 +4,7 @@ const textarea = document.getElementById("text")
 const readBtn = document.getElementById("read")
 const toggleBtn = document.getElementById("toggle")
 const closeBtn = document.getElementById("close")
+const textBox  = document.getElementById("text-box")
 
 
 const data = [
@@ -71,5 +72,31 @@ box.innerHTML = `
 main.appendChild(box)
 }
 
-
 data.forEach(createBox)
+
+// Store voices
+let voices = []
+
+const getVoices = () => {
+  voices = speechSynthesis.getVoices()
+  voices.forEach(voice => {
+    const option = document.createElement("option")
+    option.value = voice.name
+    option.innerText = `${voice.name} ${voice.lang}`
+    voicesSelect.appendChild(option)
+  })
+}
+getVoices()
+
+// Voices changed
+speechSynthesis.addEventListener("voiceschanged", getVoices)
+
+// Toggle text box
+toggleBtn.addEventListener("click", ()=> {
+  textBox.classList.toggle("show")
+})
+
+// Close Button
+closeBtn.addEventListener("click", ()=> {
+  textBox.classList.remove("show")
+})
