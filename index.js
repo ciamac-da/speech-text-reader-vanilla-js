@@ -110,6 +110,10 @@ const speakText = () => {
   speechSynthesis.speak(message)
 }
 
+// Set Voice
+const setVoice = (e) => {
+  message.voice = voices.find(voice => voice.name === e.target.value)
+}
 
 // Voices changed
 speechSynthesis.addEventListener("voiceschanged", getVoices)
@@ -122,4 +126,13 @@ toggleBtn.addEventListener("click", ()=> {
 // Close Button
 closeBtn.addEventListener("click", ()=> {
   textBox.classList.remove("show")
+})
+
+// Change voice
+voicesSelect.addEventListener("change", setVoice)
+
+// Read text button
+readBtn.addEventListener("click", ()=> {
+  setTextMessage(textarea.value)
+  speakText()
 })
